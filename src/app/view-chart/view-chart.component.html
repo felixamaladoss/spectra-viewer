@@ -1,0 +1,24 @@
+<div align="center">
+  <form [formGroup]="myForm" novalidate>
+    <mat-form-field>
+      <input matInput placeholder="JSON data" formControlName="jsondata">
+    </mat-form-field>
+    <br>
+    <br>
+    <button type="button" (click)="getJsonData()" class="btn btn-success">View Chart</button>
+  </form>
+</div>
+<br>
+<br>
+<div align="center">
+  <google-chart #chart
+                [title]="title"
+                [type]="type"
+                [data]="data"
+                [columnNames]="columnNames"
+                [options]="options"
+                [width]="width"
+                [height]="height">
+  </google-chart>
+
+</div>

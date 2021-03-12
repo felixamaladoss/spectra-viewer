@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span class="menu-spacer"></span>
+    <div >
+      <a mat-button [routerLink]="'/chart'"> Chart </a>
+     </div>
+    <span class="fill-space"></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="container" style="background-color: aliceblue">
+      <br>
+      <h2 style="text-align: center; color: indigo;">{{ title }}</h2>
+      <hr>
+      <div>
+        <div>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
