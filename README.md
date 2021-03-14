@@ -5,9 +5,9 @@ This is angular application implemented using Angular-Google-Charts library.
 https://github.com/FERNman/angular-google-charts
 
 ## Requirements
-Node.js v12.13.0
-npm v6.12.0
-Angular CLI: 8.3.21
+- Node.js v12.13.0
+- npm v6.12.0
+- Angular CLI: 8.3.21
 
 ## Build
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
@@ -25,7 +25,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 Spectra Viewer accepts data structure as a JSON format. Now it supports two keys for data points:  data , peaks.
 Both are arrays.  Peaks should have two data points: -  intensity, mz
 Data should have single data point.
+
 For example: 
+```
 "peaks": [
     {
       "intensity": 2.320237,
@@ -35,7 +37,9 @@ For example:
       "intensity": 2.952204,
       "mz": 57.748032
     } ]
+	
 "data”: [-11066.0, -10363.0, -8636.0]
+```
 
 Find Sample JSON files on location: -  e2e/src/
 
