@@ -22,8 +22,11 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Spectra Viewer accepts data structure as a JSON format. Now it supports two keys for data points:  data , peaks.
-Both are arrays.  Peaks should have two data points: -  intensity, mz
+Spectra Viewer accepts data structure as a JSON format. Now it supports two keys for data points:  data or peaks.
+Both should be array.  
+
+peaks should have two data points: -  intensity, mz
+
 Data should have single data point.
 
 For example: 
@@ -37,11 +40,11 @@ For example:
       "intensity": 2.952204,
       "mz": 57.748032
     } ]
-	
+```
 "data”: [-11066.0, -10363.0, -8636.0]
 ```
 
-Find Sample JSON files on location: -  e2e/src/
+See Sample JSON files on this location: -  e2e/src/
 
 Upload JSON text file from local machine through File uploader & click  to view chart.
 
