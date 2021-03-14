@@ -22,9 +22,6 @@ speed-measure-plugin*.json
 *.launch
 .settings/
 *.sublime-workspace
-tsconfig.app.json
-tsconfig.json
-tsconfig.spec.json
 tslint.json
 
 # IDE - VSCode
