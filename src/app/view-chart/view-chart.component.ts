@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {DataService} from '../_service';
-import {FormBuilder, FormGroup} from '@angular/forms';
 import {Spectrum} from "../_model";
 
 @Component({
@@ -19,60 +17,56 @@ export class ViewChartComponent implements OnInit {
   width = 900;
   height = 700;
   jsonData: Spectrum;
-  myForm: FormGroup;
+  message: string;
+  error: boolean;
 
 
-  constructor(private dataService: DataService,
-              private fb: FormBuilder) { }
+  constructor() { }
 
   ngOnInit() {
-    //this.drawChart1();
-   // this.drawChart();
     this.title = 'Spectra';
     this.type = 'LineChart';
     this.data = [['0', 0]];
-    this.myForm = this.fb.group({
-      jsondata: [''],
-    });
     this.columnNames = ['Spectra', 'Peaks'];
+    this.error = false;
+    this.message = "";
   }
 
   getJsonData(){
+    if(this.jsonData != undefined){
+      this.message = "";
+      this.error = false;
 
-    var jsonString = this.myForm.get('jsondata').value;
-    this.jsonData = JSON.parse(jsonString);
-    console.log("json data "+this.jsonData.data);
-    console.log("json data1 "+this.jsonData.peaks);
-    if(this.jsonData.data != undefined){
-      this.chartData = [];
-      for (let i = 0; i < this.jsonData.data.length; i++) {
-        this.chartData.push(['', this.jsonData.data[i]])
+      if(this.jsonData.data != undefined){
+        this.chartData = [];
+        for (let i = 0; i < this.jsonData.data.length; i++) {
+          this.chartData.push(['', this.jsonData.data[i]])
+        }
+        console.log("chartData "+this.chartData);
+        this.drawChart('Spectra', 'LineChart', 'ppm', 'Intensity');
       }
-      console.log("chartData "+this.chartData);
-      this.drawChart('Spectra', 'LineChart', 'ppm', 'Intensity');
-    }
-    if(this.jsonData.peaks != undefined){
-      this.chartData = [];
-      for (let i = 0; i < this.jsonData.peaks.length; i++) {
-        this.chartData.push([this.jsonData.peaks[i].intensity, this.jsonData.peaks[i].mz])
+      if(this.jsonData.peaks != undefined){
+        this.chartData = [];
+        for (let i = 0; i < this.jsonData.peaks.length; i++) {
+          this.chartData.push([this.jsonData.peaks[i].intensity, this.jsonData.peaks[i].mz])
+        }
+        console.log("chartData "+this.chartData);
+        this.drawChart(this.jsonData.spectrumId, 'ColumnChart', 'mz', 'Intensity');
       }
-      console.log("chartData "+this.chartData);
-      this.drawChart(this.jsonData.spectrumId, 'ColumnChart', 'mz', 'Intensity');
+      if(this.jsonData.peaks == undefined && this.jsonData.data == undefined) {
+        this.message = "Uploaded JSON file is not supported!";
+        this.error = true;
+      }
+    }else{
+      this.message = "Please upload your JSON file!";
+      this.error = true;
     }
-
-
   }
 
   drawChart(title, type, haxis, vaxis) {
 
     this.title = title;
     this.type = type;
-    /*this.data = [
-      ['-1.2134', -11066.0],
-      ['', -10363.0],
-      ['', -8636.0],
-      ['10.8014', -6605.0],
-    ];*/
     this.data = this.chartData;
     this.options = {
       hAxis: {
@@ -84,24 +78,28 @@ export class ViewChartComponent implements OnInit {
     };
   }
 
-  drawChart1() {
+  openFile(event) {
+    var text;
+    let input = event.target;
+    for (var index = 0; index < input.files.length; index++) {
+      let reader = new FileReader();
+      reader.onload = () => {
+        text = reader.result;
+        console.log("text"+text)
+        try{
+          this.jsonData = JSON.parse(text);
+          this.message = "";
+          this.error = false;
+        }catch (e) {
+          console.log("Uploaded file is not in JSON format");
+          this.message = "Uploaded file is not in JSON format!";
+          this.error = true;
+        }
+      }
+      reader.readAsText(input.files[index]);
+    }
 
-    this.type = 'ColumnChart';
-    this.data = [
-      [51.819397, 2.320237],
-      [57.748032, 2.952204],
-      [57.996468, 3.686789],
-      [60.081551, 101.576661],
-    ];
-
-    this.options = {
-      hAxis: {
-        title: 'mz'
-      },
-      vAxis: {
-        title: 'Intensity'
-      },
-    };
   }
+
 }
 

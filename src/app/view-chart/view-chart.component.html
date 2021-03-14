@@ -1,13 +1,15 @@
 <div align="center">
-  <form [formGroup]="myForm" novalidate>
-    <mat-form-field>
-      <input matInput placeholder="JSON data" formControlName="jsondata">
-    </mat-form-field>
-    <br>
-    <br>
-    <button type="button" (click)="getJsonData()" class="btn btn-success">View Chart</button>
-  </form>
+  <h3> Upload your file contains JSON data of Spectrum</h3>
+  <br>
+  <input type='file' accept='text/plain' (change)='openFile($event)'>
+  <button type="button" (click)="getJsonData()" class="btn btn-success">View Chart</button>
+  <div [hidden]="!error">
+    <h4><p style="color: red">{{ message }}</p></h4>
+  </div>
 </div>
+<br>
+<br>
+
 <br>
 <br>
 <div align="center">
@@ -21,4 +23,7 @@
                 [height]="height">
   </google-chart>
 
+</div>
+<div>
+  <span><br><br><br></span>
 </div>

@@ -7,8 +7,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {ViewChartComponent} from './view-chart/view-chart.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {GoogleChartsModule} from 'angular-google-charts';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HomeComponent} from "./home/home.component";
 
 @NgModule({
@@ -21,12 +19,9 @@ import {HomeComponent} from "./home/home.component";
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    FormsModule,
-    ReactiveFormsModule,
     FlexLayoutModule,
     AppRoutingModule,
-    GoogleChartsModule,
-    HttpClientModule
+    GoogleChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
